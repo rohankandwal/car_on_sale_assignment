@@ -33,6 +33,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   # pre commit hooks to format and lint dart code
   dart_pre_commit: ^5.4.4
+  # Functional programming
+  either_dart: ^1.0.0
+  # Validating email pattern
+  email_validator: ^3.0.0
   # Used to help checking if objects are equal
   equatable: ^2.0.7
   flutter:

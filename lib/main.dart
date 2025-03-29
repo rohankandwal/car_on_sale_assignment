@@ -1,6 +1,8 @@
 import 'package:assignment_car_on_sale/app_module.dart';
 import 'package:assignment_car_on_sale/app_route_generator.dart';
+import 'package:assignment_car_on_sale/core/utils/pretty_bloc_observer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum Environment {
   dev("https://dev.example.org/v1"),
@@ -12,7 +14,8 @@ enum Environment {
 }
 
 Future runApplication(final Environment environment) async {
-  AppModule().setup();
+  Bloc.observer = PrettyBlocObserver();
+  await AppModule().setup();
   runApp(const MyApp());
 }
 
