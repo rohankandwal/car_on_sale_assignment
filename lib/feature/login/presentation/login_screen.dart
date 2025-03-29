@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
               passwordController: _loginPasswordController,
             ),
             SizedBox(
-              height: 24,
+              height: 48,
             ),
             ElevatedButton(
               onPressed: () {},

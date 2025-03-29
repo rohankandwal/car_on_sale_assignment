@@ -1,3 +1,4 @@
+import 'package:assignment_car_on_sale/core/utils/space_limiting_formatter.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -42,6 +43,9 @@ class _LoginWidgetState extends State<LoginWidget> {
               style: const TextStyle(
                 fontSize: 16.0,
               ),
+              inputFormatters: [
+                SpaceLimitingFormatter.deny(),
+              ],
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 icon: Icon(
@@ -61,6 +65,9 @@ class _LoginWidgetState extends State<LoginWidget> {
               controller: widget.passwordController,
               keyboardType: TextInputType.visiblePassword,
               obscureText: _obscurePassword,
+              inputFormatters: [
+                SpaceLimitingFormatter.deny(),
+              ],
               decoration: InputDecoration(
                 border: InputBorder.none,
                 icon: Icon(
