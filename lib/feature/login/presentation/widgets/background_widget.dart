@@ -1,3 +1,4 @@
+import 'package:assignment_car_on_sale/core/utils/image_constants.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundWidget extends StatelessWidget {
@@ -5,6 +6,9 @@ class BackgroundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Image.asset(
+      ImageConstants.loginBackgroundImage,
+      fit: BoxFit.fitWidth,
+    );
   }
 }

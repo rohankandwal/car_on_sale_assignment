@@ -1,3 +1,5 @@
+import 'package:assignment_car_on_sale/feature/login/presentation/widgets/background_widget.dart';
+import 'package:assignment_car_on_sale/feature/login/presentation/widgets/login_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,7 +16,44 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final theme = Theme.of(context);
+    return Scaffold(
+      body: SafeArea(
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const BackgroundWidget(),
+            LoginWidget(
+              emailController: _loginEmailController,
+              passwordController: _loginPasswordController,
+            ),
+            SizedBox(
+              height: 24,
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 50,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                backgroundColor: theme.primaryColor,
+              ),
+              child: Text(
+                "Login Now",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: theme.colorScheme.onPrimary,
+                ),
+              ),
+            )
+          ],
+        ),
+      )),
+    );
   }
 
   @override
