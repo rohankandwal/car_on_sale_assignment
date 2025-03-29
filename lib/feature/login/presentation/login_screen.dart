@@ -1,3 +1,5 @@
+import 'package:assignment_car_on_sale/core/utils/get_it.dart';
+import 'package:assignment_car_on_sale/feature/login/presentation/bloc/login_cubit.dart';
 import 'package:assignment_car_on_sale/feature/login/presentation/widgets/background_widget.dart';
 import 'package:assignment_car_on_sale/feature/login/presentation/widgets/login_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final LoginCubit cubit = getIt.get<LoginCubit>();
   final TextEditingController _loginEmailController = TextEditingController();
   final TextEditingController _loginPasswordController =
       TextEditingController();

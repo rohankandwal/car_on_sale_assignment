@@ -12,7 +12,7 @@ class AppRouteGenerator {
       default:
         return MaterialPageRoute(
           builder: (context) => DiModuleProviderWidget(
-            module: LoginModuleImpl(),
+            module: LoginModule(),
             child: LoginScreen(),
           ),
         );

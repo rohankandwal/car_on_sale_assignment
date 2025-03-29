@@ -1,27 +1,20 @@
 import 'dart:async';
 
 import 'package:assignment_car_on_sale/core/di/di_module.dart';
+import 'package:assignment_car_on_sale/core/utils/get_it.dart';
 import 'package:assignment_car_on_sale/feature/login/presentation/bloc/login_cubit.dart';
 
-sealed class LoginModule extends DiModule {
-  LoginCubit getLoginCubit();
-}
-
-class LoginModuleImpl extends LoginModule {
-  late final LoginCubit _loginCubit;
-
+class LoginModule extends DiModule {
   @override
   void dispose() {
-    _loginCubit.close();
+    getIt.get<LoginCubit>().close();
+    getIt.unregister<LoginCubit>();
   }
 
   @override
   FutureOr<void> setup() {
-    _loginCubit = LoginCubit();
-  }
-
-  @override
-  LoginCubit getLoginCubit() {
-    return _loginCubit;
+    getIt.registerLazySingleton<LoginCubit>(() {
+      return LoginCubit();
+    });
   }
 }

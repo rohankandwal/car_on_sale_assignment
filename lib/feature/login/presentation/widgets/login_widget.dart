@@ -20,6 +20,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
@@ -46,11 +47,11 @@ class _LoginWidgetState extends State<LoginWidget> {
               inputFormatters: [
                 SpaceLimitingFormatter.deny(),
               ],
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: InputBorder.none,
                 icon: Icon(
                   Icons.mail,
-                  size: 22.0,
+                  color: theme.colorScheme.primary,
                 ),
                 label: Text('Email Address'),
                 labelStyle: TextStyle(fontSize: 16.0),
@@ -72,12 +73,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                 border: InputBorder.none,
                 icon: Icon(
                   Icons.lock,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: theme.colorScheme.primary,
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: theme.colorScheme.primary,
                   ),
                   onPressed: () {
                     setState(() {
