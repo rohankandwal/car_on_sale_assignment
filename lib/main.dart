@@ -1,5 +1,5 @@
 import 'package:assignment_car_on_sale/app_module.dart';
-import 'package:assignment_car_on_sale/feature/login/presentation/login_screen.dart';
+import 'package:assignment_car_on_sale/app_route_generator.dart';
 import 'package:flutter/material.dart';
 
 enum Environment {
@@ -19,7 +19,6 @@ Future runApplication(final Environment environment) async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,14 +28,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: '/',
-      onGenerateRoute: onGenerateRoute,
+      onGenerateRoute: AppRouteGenerator.onGenerateRoute,
     );
-  }
-}
-
-Route onGenerateRoute(RouteSettings settings) {
-  switch (settings.name) {
-    default:
-      return MaterialPageRoute(builder: (context) => LoginScreen());
   }
 }
