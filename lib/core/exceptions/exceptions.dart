@@ -31,3 +31,8 @@ class NetworkException extends BaseException {
 class ServerException extends BaseException {
   const ServerException(super.message);
 }
+
+/// Fired when get cache miss
+class CacheException extends BaseException {
+  const CacheException(super.message);
+}
