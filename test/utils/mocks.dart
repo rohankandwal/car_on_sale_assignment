@@ -1,4 +1,5 @@
 import 'package:assignment_car_on_sale/core/local_storage/shared_pref.dart';
+import 'package:assignment_car_on_sale/feature/login/data/datasource/login_local_data_source.dart';
 import 'package:assignment_car_on_sale/feature/login/data/datasource/login_remote_data_source.dart';
 import 'package:assignment_car_on_sale/feature/login/data/network/rest_client.dart';
 import 'package:assignment_car_on_sale/feature/login/domain/repository/login_repository.dart';
@@ -22,3 +23,6 @@ class MockHttpAuthenticationHandler extends Mock
 class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
 
 class MockSharedPref extends Mock implements SharedPrefImpl {}
+
+class MockLoginLocalDataSource extends Mock
+    implements LoginLocalDataSourceImpl {}

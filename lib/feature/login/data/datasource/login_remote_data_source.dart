@@ -1,4 +1,5 @@
 import 'package:assignment_car_on_sale/core/network/network_request.dart';
+import 'package:assignment_car_on_sale/feature/login/data/datasource/login_local_data_source.dart';
 import 'package:assignment_car_on_sale/feature/login/data/models/user_model.dart';
 import 'package:assignment_car_on_sale/feature/login/data/network/rest_client.dart';
 
@@ -12,8 +13,12 @@ sealed class LoginRemoteDataSource {
 
 class LoginRemoteDataSourceImpl extends LoginRemoteDataSource {
   final RestClient _client;
+  final LoginLocalDataSource _loginLocalDataSource;
 
-  LoginRemoteDataSourceImpl(this._client);
+  LoginRemoteDataSourceImpl(
+    this._client,
+    this._loginLocalDataSource,
+  );
 
   @override
   Future<UserModel> login({
@@ -29,7 +34,9 @@ class LoginRemoteDataSourceImpl extends LoginRemoteDataSource {
         },
       );
 
-      return await _client.post(networkRequest);
+      final userInformation = await _client.post(networkRequest);
+      _loginLocalDataSource.saveUserInformation(userInformation);
+      return userInformation;
     } catch (e) {
       rethrow;
     }

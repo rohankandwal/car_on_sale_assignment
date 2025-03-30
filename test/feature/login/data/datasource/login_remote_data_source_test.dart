@@ -1,5 +1,6 @@
 import 'package:assignment_car_on_sale/core/exceptions/exceptions.dart';
 import 'package:assignment_car_on_sale/core/network/network_request.dart';
+import 'package:assignment_car_on_sale/feature/login/data/datasource/login_local_data_source.dart';
 import 'package:assignment_car_on_sale/feature/login/data/datasource/login_remote_data_source.dart';
 import 'package:assignment_car_on_sale/feature/login/data/models/user_model.dart';
 import 'package:assignment_car_on_sale/feature/login/data/network/rest_client.dart';
@@ -16,11 +17,17 @@ void main() {
 
   late final RestClient restClient;
   late final LoginRemoteDataSource dataSource;
+  late final LoginLocalDataSource localDataSource;
 
   setUpAll(() {
     restClient = MockRestClient();
-    dataSource = LoginRemoteDataSourceImpl(restClient);
+    localDataSource = MockLoginLocalDataSource();
+    dataSource = LoginRemoteDataSourceImpl(
+      restClient,
+      localDataSource,
+    );
     registerFallbackValue(NetworkRequest(endPoint: 'url'));
+    registerFallbackValue(userModel);
   });
 
   group('LoginRemoteDataSource tests', () {
@@ -32,6 +39,9 @@ void main() {
       ).thenAnswer(
         (_) async => userModel,
       );
+
+      when(() => localDataSource.saveUserInformation(any()))
+          .thenAnswer((_) => Future.value());
 
       final result = await dataSource.login(
         email: email,

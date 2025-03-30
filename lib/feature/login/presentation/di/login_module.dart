@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:assignment_car_on_sale/core/di/di_module.dart';
+import 'package:assignment_car_on_sale/core/local_storage/shared_pref.dart';
 import 'package:assignment_car_on_sale/core/utils/get_it.dart';
+import 'package:assignment_car_on_sale/feature/login/data/datasource/login_local_data_source.dart';
 import 'package:assignment_car_on_sale/feature/login/data/datasource/login_remote_data_source.dart';
 import 'package:assignment_car_on_sale/feature/login/data/network/http_authentication_handler.dart';
 import 'package:assignment_car_on_sale/feature/login/data/network/rest_client.dart';
@@ -22,8 +24,12 @@ class LoginModule extends DiModule {
     getIt.registerLazySingleton<LoginCubit>(() {
       final RestClient client =
           RestClientImpl(HttpAuthenticationHandler.mockAuthClient);
-      final LoginRemoteDataSource dataSource =
-          LoginRemoteDataSourceImpl(client);
+      final LoginLocalDataSource localDataSource =
+          LoginLocalDataSourceImpl(getIt.get<SharedPref>());
+      final LoginRemoteDataSource dataSource = LoginRemoteDataSourceImpl(
+        client,
+        localDataSource,
+      );
       final LoginRepository loginRepository = LoginRepositoryImpl(dataSource);
       final LoginUseCase loginUseCase = LoginUseCase(loginRepository);
       return LoginCubit(loginUseCase);

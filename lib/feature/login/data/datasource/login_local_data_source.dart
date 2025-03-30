@@ -13,7 +13,7 @@ sealed class LoginLocalDataSource {
 class LoginLocalDataSourceImpl extends LoginLocalDataSource {
   final userInfoKey = 'user_info';
 
-  final SharedPrefImpl sharedPrefImpl;
+  final SharedPref sharedPrefImpl;
 
   LoginLocalDataSourceImpl(this.sharedPrefImpl);
 
