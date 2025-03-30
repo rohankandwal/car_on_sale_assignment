@@ -45,6 +45,8 @@ dependencies:
   flutter_bloc: ^9.1.0
   # Service Locator, to get dependencies
   get_it: ^8.0.3
+  # Network calls
+  http: ^1.3.0
 dev_dependencies:
   # Bloc tests
   bloc_test: ^10.0.0

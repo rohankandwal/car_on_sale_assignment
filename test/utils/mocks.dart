@@ -1,4 +1,5 @@
 import 'package:assignment_car_on_sale/feature/login/data/datasource/login_remote_data_source.dart';
+import 'package:assignment_car_on_sale/feature/login/data/network/rest_client.dart';
 import 'package:assignment_car_on_sale/feature/login/domain/repository/login_repository.dart';
 import 'package:assignment_car_on_sale/feature/login/domain/usecases/login_use_case.dart';
 import 'package:mocktail/mocktail.dart';
@@ -9,3 +10,5 @@ class MockLoginRepository extends Mock implements LoginRepository {}
 
 class MockLoginRemoteDataSource extends Mock
     implements LoginRemoteDataSourceImpl {}
+
+class MockRestClient extends Mock implements RestClient {}
