@@ -1,3 +1,4 @@
+import 'package:assignment_car_on_sale/app_routes.dart';
 import 'package:assignment_car_on_sale/core/dialog_service/progress_dialog_service.dart';
 import 'package:assignment_car_on_sale/core/utils/get_it.dart';
 import 'package:assignment_car_on_sale/feature/login/presentation/bloc/login_cubit.dart';
@@ -39,6 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           } else if (state is LoginLoadingState) {
             progressDialogService.showLoadingDialog(context);
+          } else if (state is LoginSuccessState) {
+            Navigator.popAndPushNamed(context, AppRoutes.homeScreenRoute);
           }
         },
         child: SingleChildScrollView(

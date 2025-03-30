@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:assignment_car_on_sale/core/exceptions/exceptions.dart';
 import 'package:assignment_car_on_sale/core/local_storage/shared_pref.dart';
+import 'package:assignment_car_on_sale/core/utils/string_constants.dart';
 import 'package:assignment_car_on_sale/feature/login/data/models/user_model.dart';
 
 sealed class LoginLocalDataSource {
@@ -11,8 +12,6 @@ sealed class LoginLocalDataSource {
 }
 
 class LoginLocalDataSourceImpl extends LoginLocalDataSource {
-  final userInfoKey = 'user_info';
-
   final SharedPref sharedPrefImpl;
 
   LoginLocalDataSourceImpl(this.sharedPrefImpl);
@@ -20,7 +19,8 @@ class LoginLocalDataSourceImpl extends LoginLocalDataSource {
   @override
   Future<UserModel?> getUserInformation() async {
     try {
-      final data = await sharedPrefImpl.getString(key: userInfoKey);
+      final data =
+          await sharedPrefImpl.getString(key: StringConstants.userInfoKey);
       if (data == null) {
         return null;
       }
@@ -36,6 +36,6 @@ class LoginLocalDataSourceImpl extends LoginLocalDataSource {
   @override
   Future<void> saveUserInformation(final UserModel userModel) {
     return sharedPrefImpl.saveString(
-        key: userInfoKey, data: jsonEncode(userModel));
+        key: StringConstants.userInfoKey, data: jsonEncode(userModel));
   }
 }
