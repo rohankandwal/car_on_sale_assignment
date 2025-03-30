@@ -1,4 +1,4 @@
-import 'package:assignment_car_on_sale/core/base_failures/base_failures.dart';
+import 'package:assignment_car_on_sale/core/failures/failures.dart';
 import 'package:assignment_car_on_sale/feature/login/domain/repository/login_repository.dart';
 import 'package:assignment_car_on_sale/feature/login/domain/usecases/login_use_case.dart';
 import 'package:either_dart/either.dart';

@@ -1,4 +1,4 @@
-import 'package:assignment_car_on_sale/core/base_failures/base_failures.dart';
+import 'package:assignment_car_on_sale/core/failures/failures.dart';
 import 'package:assignment_car_on_sale/feature/login/domain/usecases/login_use_case.dart';
 import 'package:assignment_car_on_sale/feature/login/presentation/bloc/login_cubit.dart';
 import 'package:assignment_car_on_sale/feature/login/presentation/bloc/login_state.dart';
@@ -111,8 +111,11 @@ void main() {
       'Login failure test with correct email and password',
       build: getBloc,
       act: (cubit) {
-        when(() => loginUseCase.call(any()))
-            .thenAnswer((_) async => Left(ServerFailure(serverError)));
+        when(() => loginUseCase.call(any())).thenAnswer(
+          (_) async => Left(
+            ServerFailure(serverError),
+          ),
+        );
         cubit.loginNow(email: email, password: password);
       },
       verify: (cubit) {
