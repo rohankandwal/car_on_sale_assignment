@@ -3,12 +3,12 @@ import 'package:assignment_car_on_sale/feature/login/presentation/bloc/login_sta
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-const int _passwordLength = 6;
+const int passwordLength = 6;
 
 class LoginCubit extends Cubit<LoginState> {
-  final LoginUseCase loginUseCase;
+  final LoginUseCase _loginUseCase;
 
-  LoginCubit(this.loginUseCase) : super(LoginInitialState());
+  LoginCubit(this._loginUseCase) : super(LoginInitialState());
 
   void loginNow({
     required final String email,
@@ -16,13 +16,13 @@ class LoginCubit extends Cubit<LoginState> {
   }) async {
     emit(LoginLoadingState());
     final isValidEmail = EmailValidator.validate(email);
-    final isValidPasswordFormat = password.length >= _passwordLength;
+    final isValidPasswordFormat = password.length >= passwordLength;
 
     if (!isValidEmail && !isValidPasswordFormat) {
       emit(
         LoginErrorState(
           'Please enter valid email address and password should be more '
-          'than ${_passwordLength - 1} characters',
+          'than ${passwordLength - 1} characters',
         ),
       );
     } else if (!isValidEmail) {
@@ -34,11 +34,11 @@ class LoginCubit extends Cubit<LoginState> {
     } else if (!isValidPasswordFormat) {
       emit(
         LoginErrorState(
-          'Please enter password greater than ${_passwordLength - 1} characters',
+          'Please enter password greater than ${passwordLength - 1} characters',
         ),
       );
     } else {
-      final result = await loginUseCase
+      final result = await _loginUseCase
           .call(LoginParams(email: email, password: password));
       result.fold((failure) {
         emit(
