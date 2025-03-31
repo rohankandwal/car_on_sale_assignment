@@ -1,4 +1,5 @@
 import 'package:assignment_car_on_sale/core/failures/failures.dart';
+import 'package:assignment_car_on_sale/core/utils/vin_validator.dart';
 import 'package:assignment_car_on_sale/feature/home/domain/entities/vehicle_information_entity.dart';
 import 'package:assignment_car_on_sale/feature/home/domain/entities/vehicle_search_entity.dart';
 import 'package:assignment_car_on_sale/feature/home/domain/entities/vehicle_similar_entity.dart';
@@ -8,7 +9,6 @@ import 'package:assignment_car_on_sale/feature/home/presentation/bloc/home_state
 import 'package:bloc_test/bloc_test.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:is_valid/is_valid.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../utils/mocks.dart';
@@ -118,8 +118,20 @@ void main() {
   });
 
   test('Verify VIN validation', () {
-    expect(IsValid.validateVIN(vin: '1G1AZ123456789012', vinLength: 17), true);
-    expect(IsValid.validateVIN(vin: 'TSLAZ12345678901', vinLength: 17), false);
-    expect(IsValid.validateVIN(vin: '123', vinLength: 17), false);
+    expect(
+        VinValidator.isValidVin(
+          '1G1AZ123456789012',
+        ),
+        true);
+    expect(
+        VinValidator.isValidVin(
+          'TSLAZ12345678901',
+        ),
+        false);
+    expect(
+        VinValidator.isValidVin(
+          '123',
+        ),
+        false);
   });
 }
