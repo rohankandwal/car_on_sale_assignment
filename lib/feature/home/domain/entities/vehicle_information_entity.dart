@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class VehicleInformationEntity extends Equatable {
-  final String id;
+  final int id;
   final String feedback;
   final DateTime valuatedAt;
   final DateTime requestedAt;

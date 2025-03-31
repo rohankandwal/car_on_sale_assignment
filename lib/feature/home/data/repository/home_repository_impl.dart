@@ -1,3 +1,4 @@
+import 'package:assignment_car_on_sale/core/exceptions/exceptions.dart';
 import 'package:assignment_car_on_sale/core/failures/failures.dart';
 import 'package:assignment_car_on_sale/feature/home/data/datasource/home_remote_datasource.dart';
 import 'package:assignment_car_on_sale/feature/home/domain/entities/vehicle_search_entity.dart';
@@ -16,13 +17,13 @@ class HomeRepositoryImpl extends HomeRepository {
     try {
       await remoteDataSource.searchVehicleByVin(vin);
       throw UnimplementedError();
-    } on Exception catch (e) {
+    } on BaseException catch (e) {
       return Left(
-        ServerFailure(e.toString()),
+        ServerFailure(e.message),
       );
     } catch (e) {
       return Left(
-        ServerFailure(e.toString()),
+        ServerFailure('An unexpected error occurred, try again later'),
       );
     }
   }

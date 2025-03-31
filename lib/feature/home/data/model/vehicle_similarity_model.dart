@@ -10,13 +10,13 @@ class VehicleSimilarityModel {
   final int similarity;
   final String externalId;
 
-  VehicleSimilarityModel(
-    this.make,
-    this.model,
-    this.containerName,
-    this.similarity,
-    this.externalId,
-  );
+  VehicleSimilarityModel({
+    required this.make,
+    required this.model,
+    required this.containerName,
+    required this.similarity,
+    required this.externalId,
+  });
 
   factory VehicleSimilarityModel.fromJson(Map<String, dynamic> json) =>
       _$VehicleSimilarityModelFromJson(json);

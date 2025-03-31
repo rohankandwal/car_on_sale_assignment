@@ -16,7 +16,7 @@ void main() {
   const invalidVin = 'INVALID';
 
   final vehicleInformation = VehicleInformationEntity(
-    id: '3a295387d07f',
+    id: 123456,
     feedback: "Please modify the price.",
     valuatedAt: DateTime.now(),
     requestedAt: DateTime.now(),
@@ -43,8 +43,8 @@ void main() {
   );
 
   final testVehicle = VehicleSearchEntity(
-    vehicleInformation,
-    [
+    vehicleInformation: vehicleInformation,
+    similarVehicles: [
       vehicleSimilar,
     ],
   );
