@@ -3,6 +3,7 @@ import 'package:assignment_car_on_sale/core/failures/failures.dart';
 import 'package:assignment_car_on_sale/feature/home/data/datasource/home_local_data_source.dart';
 import 'package:assignment_car_on_sale/feature/home/data/datasource/home_remote_datasource.dart';
 import 'package:assignment_car_on_sale/feature/home/data/mapper/vehicle_model_mapper.dart';
+import 'package:assignment_car_on_sale/feature/home/data/model/vehicle_search_model.dart';
 import 'package:assignment_car_on_sale/feature/home/domain/entities/vehicle_search_entity.dart';
 import 'package:assignment_car_on_sale/feature/home/domain/repository/home_repository.dart';
 import 'package:either_dart/either.dart';
@@ -40,7 +41,15 @@ class HomeRepositoryImpl extends HomeRepository {
           }
         }
       }
-      final searchModel = await remoteDataSource.searchVehicleByVin(vin);
+      final result = await remoteDataSource.searchVehicleByVin(vin);
+
+      /// Sort the similarity models by similarity in descending order
+      final sortedSimilarityModels = result.similarityModels?.toList()
+        ?..sort((a, b) => b.similarity.compareTo(a.similarity));
+      final searchModel = VehicleSearchModel(
+        informationModel: result.informationModel,
+        similarityModels: sortedSimilarityModels,
+      );
       localDataSource.saveVehicleInformation(searchModel, vin);
       final searchEntity = mapper.mapToVehicleSearchModel(searchModel);
       return Right(searchEntity);

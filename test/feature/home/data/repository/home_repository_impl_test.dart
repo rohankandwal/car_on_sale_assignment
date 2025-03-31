@@ -107,6 +107,8 @@ void main() {
       mockLocalDataSource,
       mockMapper,
     );
+
+    registerFallbackValue(testModel);
   });
 
   group('searchVehicleByVin', () {
@@ -116,20 +118,20 @@ void main() {
           .thenAnswer((_) async => null);
       when(
         () => mockLocalDataSource.saveVehicleInformation(
-          testModel,
+          any(),
           validVin,
         ),
       ).thenAnswer((_) async => {});
       when(() => mockRemoteDataSource.searchVehicleByVin(validVin))
           .thenAnswer((_) async => testModel);
-      when(() => mockMapper.mapToVehicleSearchModel(testModel))
+      when(() => mockMapper.mapToVehicleSearchModel(any()))
           .thenReturn(testEntity);
 
       final result = await repository.searchVehicleByVin(validVin);
 
       expect(result, Right(testEntity));
       verify(() => mockRemoteDataSource.searchVehicleByVin(validVin)).called(1);
-      verify(() => mockMapper.mapToVehicleSearchModel(testModel)).called(1);
+      verify(() => mockMapper.mapToVehicleSearchModel(any())).called(1);
     });
 
     test('returns ServerFailure on BaseException', () async {
@@ -185,15 +187,14 @@ void main() {
     test('returns network vehicleInformation if cache is too old', () async {
       final dateTime = DateTime.now().subtract(Duration(seconds: cacheTime));
 
-      when(() => mockMapper.mapToVehicleSearchModel(testModel))
+      when(() => mockMapper.mapToVehicleSearchModel(any()))
           .thenReturn(testEntity);
       when(() =>
               mockLocalDataSource.getVehicleInformationSavedTimeStamp(validVin))
           .thenAnswer((_) async => dateTime.toString());
       when(() => mockLocalDataSource.getVehicleInformationByVin(validVin))
           .thenAnswer((_) async => testModel);
-      when(() =>
-              mockLocalDataSource.saveVehicleInformation(testModel, validVin))
+      when(() => mockLocalDataSource.saveVehicleInformation(any(), validVin))
           .thenAnswer((_) async => {});
       when(() => mockRemoteDataSource.searchVehicleByVin(validVin))
           .thenAnswer((_) async => testModel);
@@ -207,7 +208,7 @@ void main() {
       verifyNever(
           () => mockLocalDataSource.getVehicleInformationByVin(validVin));
       verify(() => mockRemoteDataSource.searchVehicleByVin(validVin)).called(1);
-      verify(() => mockMapper.mapToVehicleSearchModel(testModel)).called(1);
+      verify(() => mockMapper.mapToVehicleSearchModel(any())).called(1);
     });
   });
 }
