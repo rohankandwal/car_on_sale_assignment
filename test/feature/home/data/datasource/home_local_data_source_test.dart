@@ -96,17 +96,28 @@ void main() {
   group('saveVehicleInformation', () {
     test('saves valid JSON string with correct key', () async {
       final expectedJson = jsonEncode(testModel.toJson());
+      final String timestampKey = '$testVin${StringConstants.timeStamp}';
+
       when(() => mockSharedPref.saveString(
             key: testVin,
             data: expectedJson,
           )).thenAnswer((_) async => {});
+      when(
+        () => mockSharedPref.saveString(
+          key: timestampKey,
+          data: any(named: 'data'),
+        ),
+      ).thenAnswer((_) async => {});
 
       await dataSource.saveVehicleInformation(testModel, testVin);
 
-      verify(() => mockSharedPref.saveString(
-            key: testVin,
-            data: expectedJson,
-          )).called(1);
+      verifyInOrder([
+        () => mockSharedPref.saveString(key: testVin, data: expectedJson),
+        () => mockSharedPref.saveString(
+              key: timestampKey,
+              data: captureAny(named: 'data'),
+            )
+      ]);
     });
   });
 

@@ -45,11 +45,21 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   Future<void> saveVehicleInformation(
     final VehicleSearchModel vehicleInformation,
     final String vin,
-  ) {
-    return sharedPref.saveString(
-      key: vin,
-      data: jsonEncode(vehicleInformation.toJson()),
-    );
+  ) async {
+    try {
+      await sharedPref.saveString(
+        key: vin,
+        data: jsonEncode(vehicleInformation.toJson()),
+      );
+      await sharedPref.saveString(
+        key: '$vin${StringConstants.timeStamp}',
+        data: DateTime.now().toString(),
+      );
+    } on FormatException {
+      throw ParsingException(
+        'Error getting vehicle information from cache',
+      );
+    }
   }
 
   @override
