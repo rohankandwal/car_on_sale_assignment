@@ -63,3 +63,7 @@ Sample credentials - r@r.com/123123123 (min 6 characters)
 get a full match or a list of similar vehicles. However, we are using https://pub.dev/packages/is_valid 
 for VIN validation. Use 1G1AZ123456789012 as a test VIN.
 - **Caching Data**: VIN search results are cached for 1 minute. If local copy exists, it will be used.
+
+## Demo
+
+<video src='recording/assignment_recording.webm' width=180/>
