@@ -44,4 +44,16 @@ void main() {
       ],
     );
   });
+
+  blocTest<AuthenticationCubit, AuthenticationState>(
+    'emits [UserNotAuthorizedState] when user logs out',
+    build: () => cubit,
+    act: (cubit) => cubit.logout(),
+    setUp: () {
+      when(() => mockSharedPref.clearData()).thenAnswer((_) async => {});
+    },
+    expect: () => [
+      isA<UserNotAuthorizedState>(),
+    ],
+  );
 }

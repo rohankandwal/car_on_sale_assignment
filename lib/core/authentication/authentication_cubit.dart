@@ -18,4 +18,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(UserNotAuthorizedState());
     }
   }
+
+  void logout() {
+    _sharedPref.clearData();
+    emit(UserNotAuthorizedState());
+  }
 }

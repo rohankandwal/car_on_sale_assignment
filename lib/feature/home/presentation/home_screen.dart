@@ -1,3 +1,5 @@
+import 'package:assignment_car_on_sale/app_routes.dart';
+import 'package:assignment_car_on_sale/core/authentication/authentication_cubit.dart';
 import 'package:assignment_car_on_sale/core/dialog_service/progress_dialog_service.dart';
 import 'package:assignment_car_on_sale/core/utils/get_it.dart';
 import 'package:assignment_car_on_sale/core/utils/space_limiting_formatter.dart';
@@ -58,7 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                getIt.get<AuthenticationCubit>().logout();
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  AppRoutes.loginScreenRoute,
+                  (route) => false,
+                );
+              },
               child: Text(
                 'Logout',
                 style: TextStyle(

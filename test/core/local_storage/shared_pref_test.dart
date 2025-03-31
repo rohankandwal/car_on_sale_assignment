@@ -68,5 +68,15 @@ void main() {
         throwsA(exception),
       );
     });
+
+    test('Clears all the keys', () async {
+      when(
+        () => mockStorage.deleteAll(),
+      ).thenAnswer((_) async => {});
+
+      await sharedPref.clearData();
+
+      verify(() => mockStorage.deleteAll()).called(1);
+    });
   });
 }

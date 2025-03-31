@@ -7,6 +7,8 @@ sealed class SharedPref {
     required final String key,
     required final String data,
   });
+
+  Future<void> clearData();
 }
 
 class SharedPrefImpl extends SharedPref {
@@ -25,5 +27,10 @@ class SharedPrefImpl extends SharedPref {
     required final String data,
   }) {
     return storage.write(key: key, value: data);
+  }
+
+  @override
+  Future<void> clearData() {
+    return storage.deleteAll();
   }
 }
