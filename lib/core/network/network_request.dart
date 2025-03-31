@@ -4,7 +4,7 @@ class NetworkRequest extends Equatable {
   final String endPoint;
   final Map<String, dynamic>? requestBody;
   final Map<String, dynamic>? queryParams;
-  final Map<String, dynamic>? headers;
+  final Map<String, String>? headers;
 
   const NetworkRequest({
     required this.endPoint,

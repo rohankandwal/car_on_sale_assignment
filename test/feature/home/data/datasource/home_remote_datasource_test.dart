@@ -19,12 +19,14 @@ void main() {
   late HomeRemoteDataSourceImpl dataSource;
   const testVin = '1G1AZ123456789012';
   final testUser = UserModel(token: 'test_token', name: 'test_user');
-  final networkRequest =
-      NetworkRequest(endPoint: "searchVehicle", requestBody: {
-    "vin": testVin,
-  }, headers: {
-    'auth': testUser.token,
-  });
+  final networkRequest = NetworkRequest(
+      endPoint: StringConstants.endPointSearchVehicle,
+      requestBody: {
+        StringConstants.paramVin: testVin,
+      },
+      headers: {
+        StringConstants.headerAuth: testUser.token,
+      });
   final mockInformationModel = VehicleInformationModel(
     model: 'Model S',
     make: 'Tesla',
@@ -95,17 +97,17 @@ void main() {
             that: isA<NetworkRequest>()
                 .having(
                   (r) => r.endPoint,
-                  'endPoint',
-                  'searchVehicle',
+                  'Checking endPoint',
+                  StringConstants.endPointSearchVehicle,
                 )
                 .having(
-                  (r) => r.requestBody?['vin'],
-                  'vin',
+                  (r) => r.requestBody?[StringConstants.paramVin],
+                  'Checking vin header',
                   testVin,
                 )
                 .having(
-                  (r) => r.headers?['auth'],
-                  'auth',
+                  (r) => r.headers?[StringConstants.headerAuth],
+                  'Checking auth header',
                   testUser.token,
                 ),
           ),

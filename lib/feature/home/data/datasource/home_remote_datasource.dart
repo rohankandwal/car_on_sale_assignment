@@ -32,12 +32,14 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
         );
       }
       final userModel = UserModel.fromJson(jsonDecode(userInfoData));
-      final networkRequest =
-          NetworkRequest(endPoint: "searchVehicle", requestBody: {
-        "vin": vin,
-      }, headers: {
-        'auth': userModel.token,
-      });
+      final networkRequest = NetworkRequest(
+          endPoint: StringConstants.endPointSearchVehicle,
+          requestBody: {
+            StringConstants.paramVin: vin,
+          },
+          headers: {
+            StringConstants.headerAuth: userModel.token,
+          });
 
       final vehicleInformation = await _client.post(networkRequest);
       return vehicleInformation;
