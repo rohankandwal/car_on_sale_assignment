@@ -66,4 +66,4 @@ for VIN validation. Use 1G1AZ123456789012 as a test VIN.
 
 ## Demo
 
-<video src='recording/assignment_recording.webm' width=180/>
+https://github.com/user-attachments/assets/255ec744-614d-4fa1-9630-d4110162c5eb
