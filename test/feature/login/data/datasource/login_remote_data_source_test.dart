@@ -20,7 +20,7 @@ void main() {
   late final LoginLocalDataSource localDataSource;
 
   setUpAll(() {
-    restClient = MockRestClient();
+    restClient = MockLoginRestClient();
     localDataSource = MockLoginLocalDataSource();
     dataSource = LoginRemoteDataSourceImpl(
       restClient,
