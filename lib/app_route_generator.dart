@@ -1,5 +1,6 @@
 import 'package:assignment_car_on_sale/app_routes.dart';
 import 'package:assignment_car_on_sale/core/di/di_module_provider_widget.dart';
+import 'package:assignment_car_on_sale/feature/home/presentation/di/home_module.dart';
 import 'package:assignment_car_on_sale/feature/home/presentation/home_screen.dart';
 import 'package:assignment_car_on_sale/feature/login/presentation/di/login_module.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,10 @@ class AppRouteGenerator {
     switch (settings.name) {
       case AppRoutes.homeScreenRoute:
         return MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => DiModuleProviderWidget(
+            module: HomeModule(),
+            child: const HomeScreen(),
+          ),
           settings: initialSettings,
         );
       case AppRoutes.loginScreenRoute:
