@@ -1,3 +1,4 @@
+import 'package:assignment_car_on_sale/feature/home/domain/entities/vehicle_search_entity.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class HomeState extends Equatable {
@@ -9,14 +10,14 @@ class HomeInitialState extends HomeState {}
 
 class HomeLoadingState extends HomeState {}
 
-class HomeSearchVinState extends HomeState {
-  final String vin;
+class HomeSuccessVinState extends HomeState {
+  final VehicleSearchEntity vehicleSearch;
 
-  HomeSearchVinState(this.vin);
+  HomeSuccessVinState(this.vehicleSearch);
 
   @override
   List<Object?> get props => [
-        vin,
+        vehicleSearch,
       ];
 }
 
