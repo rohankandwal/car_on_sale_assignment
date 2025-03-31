@@ -25,7 +25,7 @@ void main() {
 
   setUpAll(() {
     EnvConstants.setEnvironment(Environment.dev);
-    authClient = MockHttpAuthenticationHandler();
+    authClient = MockHttpHandler();
     restClient = RestClientImpl(authClient);
     registerFallbackValue(Uri.parse('uri'));
   });

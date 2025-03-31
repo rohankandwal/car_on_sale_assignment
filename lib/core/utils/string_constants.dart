@@ -6,4 +6,5 @@ class StringConstants {
   static const headerAuth = 'user';
   static const paramVin = 'vin';
   static const endPointSearchVehicle = 'searchVehicle';
+  static const errorMessage = 'message';
 }

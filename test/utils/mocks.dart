@@ -26,8 +26,9 @@ class MockLoginRemoteDataSource extends Mock
 class MockLoginRestClient extends Mock
     implements login_rest_client.RestClientImpl {}
 
-class MockHttpAuthenticationHandler extends Mock
-    implements auth_handler.BaseClient {}
+class MockHttpHandler extends Mock implements auth_handler.BaseClient {}
+
+class MockHttpClient extends Mock implements auth_handler.Client {}
 
 class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
 

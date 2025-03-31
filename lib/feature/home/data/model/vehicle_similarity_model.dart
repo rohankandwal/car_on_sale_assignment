@@ -1,16 +1,17 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'vehicle_similarity_model.g.dart';
 
 @JsonSerializable()
-class VehicleSimilarityModel {
+class VehicleSimilarityModel extends Equatable {
   final String make;
   final String model;
   final String containerName;
   final int similarity;
   final String externalId;
 
-  VehicleSimilarityModel({
+  const VehicleSimilarityModel({
     required this.make,
     required this.model,
     required this.containerName,
@@ -22,4 +23,13 @@ class VehicleSimilarityModel {
       _$VehicleSimilarityModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$VehicleSimilarityModelToJson(this);
+
+  @override
+  List<Object?> get props => [
+        make,
+        model,
+        containerName,
+        similarity,
+        externalId,
+      ];
 }
