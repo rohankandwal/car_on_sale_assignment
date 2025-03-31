@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
         }
       },
       child: MaterialApp(
+        debugShowCheckedModeBanner: EnvConstants.environment == Environment.dev,
         navigatorKey: navigatorKey,
         title: 'CarOnSale demo',
         theme: ThemeData(
