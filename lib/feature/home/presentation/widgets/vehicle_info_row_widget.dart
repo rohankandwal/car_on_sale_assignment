@@ -22,7 +22,7 @@ class VehicleInfoRowWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: theme.primaryColor,
+              color: theme.colorScheme.primary,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

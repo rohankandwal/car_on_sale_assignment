@@ -1,6 +1,7 @@
 import 'package:assignment_car_on_sale/app_routes.dart';
 import 'package:assignment_car_on_sale/core/authentication/authentication_cubit.dart';
 import 'package:assignment_car_on_sale/core/dialog_service/progress_dialog_service.dart';
+import 'package:assignment_car_on_sale/core/theme/theme_cubit.dart';
 import 'package:assignment_car_on_sale/core/utils/get_it.dart';
 import 'package:assignment_car_on_sale/core/utils/space_limiting_formatter.dart';
 import 'package:assignment_car_on_sale/feature/home/presentation/bloc/home_cubit.dart';
@@ -19,24 +20,55 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _vinController = TextEditingController();
   final HomeCubit homeCubit = getIt.get<HomeCubit>();
+  final ThemeCubit themeCubit = getIt.get<ThemeCubit>();
   final ProgressDialogService progressDialogService =
       getIt.get<ProgressDialogService>();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final currentTheme = themeCubit.state;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: theme.primaryColor,
         title: Text(
           "CarOnSale",
           style: TextStyle(
-            color: theme.colorScheme.onPrimary,
+            color: theme.colorScheme.primary,
           ),
         ),
         iconTheme: IconThemeData(
-          color: theme.canvasColor,
+          color: theme.colorScheme.primary,
         ),
+        actions: [
+          PopupMenuButton<ThemeState>(
+            onSelected: (selectedTheme) {
+              final themeCubit = getIt.get<ThemeCubit>();
+              themeCubit.setTheme(selectedTheme); // Change the theme
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: ThemeState.light,
+                child: Row(
+                  children: [
+                    Text('Light Theme'),
+                    if (currentTheme == ThemeState.light)
+                      Icon(Icons.check, color: theme.colorScheme.primary),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: ThemeState.dark,
+                child: Row(
+                  children: [
+                    Text('Dark Theme'),
+                    if (currentTheme == ThemeState.dark)
+                      Icon(Icons.check, color: theme.colorScheme.primary),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       drawer: Container(
         color: theme.canvasColor,
@@ -147,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        backgroundColor: theme.primaryColor,
+                        backgroundColor: theme.colorScheme.primary,
                       ),
                       onPressed: () {
                         homeCubit.searchVin(_vinController.text);
@@ -156,6 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         'Search',
                         style: TextStyle(
                           color: theme.colorScheme.onPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
                     )

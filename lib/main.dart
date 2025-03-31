@@ -4,6 +4,7 @@ import 'package:assignment_car_on_sale/app_routes.dart';
 import 'package:assignment_car_on_sale/core/authentication/authentication_cubit.dart';
 import 'package:assignment_car_on_sale/core/authentication/authentication_state.dart';
 import 'package:assignment_car_on_sale/core/config/env_constants.dart';
+import 'package:assignment_car_on_sale/core/theme/theme_cubit.dart';
 import 'package:assignment_car_on_sale/core/utils/get_it.dart';
 import 'package:assignment_car_on_sale/core/utils/pretty_bloc_observer.dart';
 import 'package:flutter/material.dart';
@@ -35,16 +36,19 @@ class MyApp extends StatelessWidget {
           );
         }
       },
-      child: MaterialApp(
-        debugShowCheckedModeBanner: EnvConstants.environment == Environment.dev,
-        navigatorKey: navigatorKey,
-        title: 'CarOnSale demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        initialRoute: AppRoutes.loginScreenRoute,
-        onGenerateRoute: AppRouteGenerator.onGenerateRoute,
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        bloc: getIt.get<ThemeCubit>(),
+        builder: (context, themeState) {
+          return MaterialApp(
+            debugShowCheckedModeBanner:
+                EnvConstants.environment == Environment.dev,
+            navigatorKey: navigatorKey,
+            title: 'CarOnSale demo',
+            theme: themeState == ThemeState.light ? lightTheme : darkTheme,
+            initialRoute: AppRoutes.loginScreenRoute,
+            onGenerateRoute: AppRouteGenerator.onGenerateRoute,
+          );
+        },
       ),
     );
   }

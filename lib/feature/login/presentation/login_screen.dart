@@ -33,9 +33,16 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           progressDialogService.hideLoadingDialog(context);
           if (state is LoginErrorState) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(state.message),
+                content: Text(
+                  state.message,
+                  style: TextStyle(
+                    color: theme.colorScheme.onError,
+                  ),
+                ),
+                backgroundColor: theme.colorScheme.error,
               ),
             );
           } else if (state is LoginLoadingState) {
@@ -70,13 +77,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  backgroundColor: theme.primaryColor,
+                  backgroundColor: theme.colorScheme.primary,
                 ),
                 child: Text(
                   "Login Now",
                   style: TextStyle(
                     fontSize: 16,
                     color: theme.colorScheme.onPrimary,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               )
